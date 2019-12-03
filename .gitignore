@@ -2,6 +2,7 @@
 dump/
 final/
 raw/
+.vscode/
 
 # Jar files
 *.jar

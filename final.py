@@ -1,11 +1,10 @@
 import sys
 
-rawFolder = sys.argv[-2]
-saveFolder = sys.argv[-1]
 sanitizeFlag = False
+rawDir = "raw/{}"
 delimeter = ("\t", ",")[sanitizeFlag]
 headers = delimeter.join(["ID", "Player", "Wins", "Losses", "KDA", "Kills", "Deaths", "Assists", "LH", "DN", "GPM", "XPM"])
-filename = "{}/{}.{}".format(saveFolder, sys.argv[1][:sys.argv[1].index(".")], ("txt", "csv")[sanitizeFlag])
+filename = "{}/{}.{}".format("final", sys.argv[1][:sys.argv[1].index(".")], ("txt", "csv")[sanitizeFlag])
 
 def createPlayersDict(inFile):
   inF = open(inFile)
@@ -43,10 +42,10 @@ def sanitize(aStr):
   else:
     return "{}{}".format(aStr, delimeter)
 
-currentDict = createPlayersDict("{}/{}".format(rawFolder,sys.argv[1]))
+currentDict = createPlayersDict(rawDir.format(sys.argv[1]))
 previousDict = None
 if len(sys.argv) == 5:
-  previousDict = createPlayersDict("{}/{}".format(rawFolder,sys.argv[2]))
+  previousDict = createPlayersDict(rawDir.format(sys.argv[2]))
 
 outF = open(filename, "w")
 outF.write(headers + "\n")

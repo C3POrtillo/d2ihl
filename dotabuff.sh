@@ -1,56 +1,32 @@
 #!/bin/bash
+# Curls a given Dotabuff league for its Most Successful Players Table
+source ./config
 
-tagsoup="tagsoup-1.2.1.jar"
-dump="dump"
-raw="raw"
-final="final"
-useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30"
-url="https://www.dotabuff.com/esports/leagues/11142-bd2l-season-3-na/players"
-week=$(/bin/date +%V)
-filename="players-$week"
-scrapeFile="$dump/$filename"
-
-# Create folder for xhtml/html files
-if [ ! -d $dump ]; then
-  mkdir -m 750 $dump
-fi
-
-# Create folder to log raw biweekly data
-if [ ! -d $raw ]; then
-  mkdir -m 750 $raw
-fi
-
-# Create folder to log parsed biweekly data
-if [ ! -d $final ]; then
-  mkdir -m 750 $final
-fi
+# Create the necessary folders for files
+for dir in "dump" "raw" "final"; do
+  if [ ! -d $dir ]; then
+    mkdir -m 750 $dir
+  fi
+done
 
 # Download tagsoup if missing
 if [ ! -f $tagsoup ]; then
   curl "http://vrici.lojban.org/~cowan/XML/tagsoup/$tagsoup" --output "$tagsoup"
 fi
 
-# Curl Dotabuff html, convert to xhtml
-cd "$dump"
-if [ ! -f "$filename.html" ]; then
-  cd ..
+# Curl Dotabuff html, convert to xhtml if x html file doesn't exist
+if [ ! -e "$scrapeFile.html" ]; then
   curl -A "$useragent" "$url" --output "$scrapeFile.html"
   java -jar "$tagsoup" --files "$scrapeFile.html"
-else
-  cd ..
 fi
 
 # Parse xhtml and create a raw text file
-python3 raw.py "$scrapeFile.xhtml" "$raw"
+python3 raw.py "$scrapeFile.xhtml"
 
 # Create final file (.csv or .txt) for spreadsheet import
-files=($(ls $raw | sort))
+files=($(ls raw/ | sort))
 if ((${#files[@]} > 1)); then
-  python3 final.py "${files[-1]}" "${files[-2]}" "$raw" "$final"
+  python3 final.py "${files[-1]}" "${files[-2]}"
 else
-  python3 final.py "${files[-1]}" "$raw" "$final"
+  python3 final.py "${files[-1]}"
 fi
-
-# Remove temporary files (Optional)
-# rm $tagsoup
-# rm -rf $dump

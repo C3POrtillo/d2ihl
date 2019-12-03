@@ -3,10 +3,9 @@ import xml.dom.minidom as minidom
 from datetime import date
 
 document = minidom.parse(sys.argv[1])
-saveFolder = sys.argv[2]
 today = date.today().strftime("%Y-%m-%d")
 delimeter = "\t"
-filename = "{}/{}.txt".format(saveFolder, today)
+filename = "raw/{}.txt".format(today)
 
 def getPlayerData(tr):
   """Returns a string containing a player's statistics from a tr element"""
