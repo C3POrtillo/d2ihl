@@ -1,6 +1,12 @@
 import sys
 
-sanitizeFlag = False
+config = open("config")
+for i in range(2):
+  line = config.readline().strip()
+line = config.readline().strip()
+line = line[line.index("=") + 1:]
+sanitizeFlag = line.lower() == "true"
+config.close()
 rawDir = "raw/{}"
 delimeter = ("\t", ",")[sanitizeFlag]
 headers = delimeter.join(["ID", "Player", "Wins", "Losses", "KDA", "Kills", "Deaths", "Assists", "LH", "DN", "GPM", "XPM"])
