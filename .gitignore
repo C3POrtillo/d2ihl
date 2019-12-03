@@ -1,0 +1,7 @@
+# Directories
+dump/
+final/
+raw/
+
+# Jar files
+*.jar
