@@ -1,7 +1,7 @@
 # Directories
-Bi-WeekStats/dump/
-Bi-WeekStats/final/
-Bi-WeekStats/raw/
+Bi-Week-Stats/dump/
+Bi-Week-Stats/final/
+Bi-Week-Stats/raw/
 .vscode/
 # Jar files
 *.jar
