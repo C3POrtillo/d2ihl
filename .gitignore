@@ -1,7 +1,7 @@
 # Directories
-*/dump/
-*/final/
-*/raw/
+**/dump/
+**/final/
+**/raw/
 .vscode/
 # Jar files
 *.jar
