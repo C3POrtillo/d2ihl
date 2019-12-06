@@ -18,7 +18,9 @@
 =================
 
 * Project can create .txt (Default) or .csv files
-* To create a .csv file, set the csv from False to True in config
+* To create a .csv file, set the csv from `false` to `true` in config
+* Project can calculate total of ALL matches rather than just the ones that occur during a time period
+* To do this, set the allMatches flag from `0` to `1` in config
 * TODO - Maybe make this a Discord bot or something
 
 

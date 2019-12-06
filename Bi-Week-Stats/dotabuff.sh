@@ -24,9 +24,10 @@ fi
 python3 raw.py "$scrapeFile.xhtml"
 
 # Create final file (.csv or .txt) for spreadsheet import
+
 files=($(ls raw/ | sort))
-if ((${#files[@]} > 1)); then
+if ((${#files[@]} > 1 && !$allMatches == 1)); then
   python3 final.py "${files[-1]}" "${files[-2]}"
-else
+else  
   python3 final.py "${files[-1]}"
 fi

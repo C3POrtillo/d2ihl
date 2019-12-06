@@ -1,6 +1,7 @@
 # EDIT
 url="https://www.dotabuff.com/esports/leagues/11142-bd2l-season-3-na/players"
-csv=True
+csv=false
+allMatches=0
 # DO NOT EDIT
 tagsoup="tagsoup-1.2.1.jar"
 useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30"
