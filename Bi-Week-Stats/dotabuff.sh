@@ -14,11 +14,8 @@ if [ ! -f $tagsoup ]; then
   curl "http://vrici.lojban.org/~cowan/XML/tagsoup/$tagsoup" --output "$tagsoup"
 fi
 
-# Curl Dotabuff html, convert to xhtml if x html file doesn't exist
-if [ ! -e "$scrapeFile.html" ]; then
-  curl -A "$useragent" "$url" --output "$scrapeFile.html"
-  java -jar "$tagsoup" --files "$scrapeFile.html"
-fi
+curl -A "$useragent" "$url" --output "$scrapeFile.html"
+java -jar "$tagsoup" --files "$scrapeFile.html"
 
 # Parse xhtml and create a raw text file
 python3 raw.py "$scrapeFile.xhtml"
