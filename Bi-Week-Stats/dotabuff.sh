@@ -14,7 +14,13 @@ if [ ! -f $tagsoup ]; then
   curl "http://vrici.lojban.org/~cowan/XML/tagsoup/$tagsoup" --output "$tagsoup"
 fi
 
-curl -A "$useragent" "$url" --output "$scrapeFile.html"
+# Check if source has been updated if download exists
+zflag=()
+if [ -e "$scrapeFile.html" ]; then
+  zflag=("-z" "$scrapeFile.html")
+fi
+
+curl -A "$useragent" "$url" -o "$scrapeFile.html" ${zflag[@]}
 java -jar "$tagsoup" --files "$scrapeFile.html"
 
 # Parse xhtml and create a raw text file
