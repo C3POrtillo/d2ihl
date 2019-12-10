@@ -38,7 +38,8 @@ files=($(ls raw/ | sort))
 if ((${#files[@]} > 1 && $allMatches == 0)); then
   lastDay="last $day"
   dotw=$(date -d today +%u)
-  if (( ($currentWeek % 2 == 0 && $dotw >= 5) || ($currentWeek % 2 == 1 && $dotw < 5) )); then
+  dotwNum=$(date -d $day +%u) 
+  if (( ($currentWeek % 2 == 0 && $dotw >= ($dotwNum + 1) ) || ($currentWeek % 2 == 1 && $dotw < ($dotwNum + 1) ) )); then
     lastDay+="7 days ago"
   fi
   compare=$(date -d "$lastDay" +%Y-%m-%d-%V)
