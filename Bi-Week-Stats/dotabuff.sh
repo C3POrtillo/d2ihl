@@ -1,6 +1,13 @@
 #!/bin/bash
 # Curls a given Dotabuff league for its Most Successful Players Table
+
 source ./config
+
+tagsoup="tagsoup-1.2.1.jar"
+useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30"
+date=$(date "+%Y-%m-%d")
+currentWeek=$(date "+%V")
+scrapeFile="dump/$date-$currentWeek"
 
 # Create the necessary folders for files
 for dir in "dump" "raw" "final"; do
@@ -27,10 +34,15 @@ java -jar "$tagsoup" --files "$scrapeFile.html"
 python3 raw.py "$scrapeFile.xhtml"
 
 # Create final file (.csv or .txt) for spreadsheet import
-
 files=($(ls raw/ | sort))
-if ((${#files[@]} > 1 && !$allMatches == 1)); then
-  python3 final.py "${files[-1]}" "${files[-2]}"
+if ((${#files[@]} > 1 && $allMatches == 0)); then
+  lastDay="last $day"
+  dotw=$(date -d today +%u)
+  if (( ($currentWeek % 2 == 0 && $dotw >= 5) || ($currentWeek % 2 == 1 && $dotw < 5) )); then
+    lastDay+="7 days ago"
+  fi
+  compare=$(date -d "$lastDay" +%Y-%m-%d-%V)
+  python3 final.py "${files[-1]}" "$compare.txt"
 else  
   python3 final.py "${files[-1]}"
 fi

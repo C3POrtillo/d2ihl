@@ -7,20 +7,33 @@
 2. Python
 3. Java
 
+### Config Variables:
+=================
+1. url: The players url for a league - A String
+
+   EX: `"https://www.dotabuff.com/esports/leagues/11440-d2ihl-season-1/players"`
+
+2. csv: A flag that creates a `csv` file instead of a `txt` file 
+
+   EX: `0` for `txt` files, `1` for `csv` files
+
+3. allMatches: A flag that calculates statistics for all player data, rather than as a difference between two time periods
+
+   EX: `0` for calculate bi-week difference, `1` for calculate total stats
+   
+4. day: the day of the week to anchor on
+   
+   EX: `thursday` means the last day of the biweek period ends on a thursday and starts on a friday
+
+
 ### How to use:
 =================
-
-1. Edit config with the appropriate dotabuff players url for a league
-2. Run command: `./dotabuff.sh` every 2 weeks or as necessary
-3. Final text file will be under the "final/" folder as `YYYY-MM-DD.txt` or `YYYY-MM-DD.csv`, which is the current date.
+1. Run command: `./dotabuff.sh` 
+2. Final text file will be under the `final/` folder as `YYYY-MM-DD-WW.txt` or `YYYY-MM-DD-WW.csv`, which is the current date and the week of the year.
  
 ### Other
 =================
 
-* Project can create `.txt` (Default) or `.csv` files
-* To create a `.csv` file, set the csv from `false` to `true` in config
-* Project can calculate total of ALL matches rather than just the ones that occur during a time period
-* To do this, set the allMatches flag from `0` to `1` in config
 * TODO - Maybe make this a Discord bot or something
 
 

@@ -1,9 +1,5 @@
 # EDIT
 url="https://www.dotabuff.com/esports/leagues/11440-d2ihl-season-1/players"
-csv=false
-allMatches=0
-# DO NOT EDIT
-tagsoup="tagsoup-1.2.1.jar"
-useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6_8) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.112 Safari/534.30"
-week=$(/bin/date +%V)
-scrapeFile="dump/players-$week"
+csv=0
+allMatches=1
+day=thursday
