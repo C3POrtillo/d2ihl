@@ -5,7 +5,7 @@ for i in range(2):
   line = config.readline().strip()
 line = config.readline().strip()
 line = line[line.index("=") + 1:]
-sanitizeFlag = line.lower() == "true"
+sanitizeFlag = line.lower() == "1"
 config.close()
 rawDir = "raw/{}"
 delimeter = ("\t", ",")[sanitizeFlag]
@@ -50,9 +50,9 @@ def sanitize(aStr):
 
 currentDict = createPlayersDict(rawDir.format(sys.argv[1]))
 previousDict = None
-if len(sys.argv) == 5:
+if len(sys.argv) == 3:
   previousDict = createPlayersDict(rawDir.format(sys.argv[2]))
-
+  
 outF = open(filename, "w")
 outF.write(headers + "\n")
 
