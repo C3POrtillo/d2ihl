@@ -3,7 +3,7 @@ import xml.dom.minidom as minidom
 from datetime import date
 
 document = minidom.parse(sys.argv[1])
-today = date.today().strftime("%Y-%m-%d")
+today = date.today().strftime("%Y-%m-%d-%V")
 delimeter = "\t"
 filename = "raw/{}.txt".format(today)
 

@@ -24,12 +24,23 @@ def createPlayersDict(inFile):
 def statDifference(playerID):
   global currentDict
   global previousDict
-  currentStats = currentDict[playerID]
-  previousStats = previousDict[playerID]
+  try:
+    currentStats = currentDict[playerID]
+  except:
+    currentStats = None
+  try:
+    previousStats = previousDict[playerID]
+  except:
+    previousStats = None
   biweekStats = []
-  for i in range(len(currentStats)):
+  for i in range(1, len(currentStats)):
     try:
-      biweekStats.append(double(currentStats[i]) - double(previousStats[i]))
+      curr = float(currentStats[i])
+      prev = float(previousStats[i])
+      diff = curr - prev
+      if i < 3:
+        diff = int(diff)
+      biweekStats.append(diff)
     except:
       biweekStats.append(0)
   return biweekStats

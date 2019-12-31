@@ -16,7 +16,7 @@ for dir in "dump" "raw" "final"; do
   fi
 done
 
-# Download tagsoup if missing
+Download tagsoup if missing
 if [ ! -f $tagsoup ]; then
   curl "http://vrici.lojban.org/~cowan/XML/tagsoup/$tagsoup" --output "$tagsoup"
 fi
