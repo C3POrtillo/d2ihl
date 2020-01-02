@@ -3,5 +3,10 @@
 **/final/
 **/raw/
 .vscode/
+
 # Jar files
 *.jar
+
+# Node Files
+**/node_modules/
+**/.env
